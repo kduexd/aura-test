@@ -11,7 +11,7 @@ import (
 )
 
 type ResOfInfo struct {
-	UUID     string    `db:"id"`
+	UUID     string    `db:"uuid"`
 	Name     string    `db:"name"`
 	Password string    `db:"password"`
 	Created  time.Time `db:"created"`
