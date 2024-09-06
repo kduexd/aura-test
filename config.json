@@ -1,0 +1,10 @@
+{
+  "time_of_api": "15m",
+  "token_expire_time": 7200,
+  "db": {
+    "timeout": "60s",
+    "conn_max_life_time": 5,
+    "max_open_conns": 100,
+    "max_idle_conns": 90
+  }
+}

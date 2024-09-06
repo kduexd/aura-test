@@ -1,0 +1,112 @@
+definitions:
+  ads.ResOfList:
+    properties:
+      category:
+        type: string
+      item_name:
+        type: string
+      itemid:
+        type: integer
+    type: object
+  item.Response:
+    properties:
+      item: {}
+      status:
+        type: string
+    type: object
+  user.ReqOfLogin:
+    properties:
+      Password:
+        example: "12345"
+        type: string
+      UserName:
+        example: test
+        type: string
+    required:
+    - Password
+    - UserName
+    type: object
+  user.Response:
+    properties:
+      description:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/item:
+    get:
+      consumes:
+      - multipart/form-data
+      description: get item list
+      parameters:
+      - description: username
+        in: query
+        name: username
+        required: true
+        type: string
+      - description: type of item
+        in: query
+        name: item
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/item.Response'
+            - properties:
+                item:
+                  $ref: '#/definitions/ads.ResOfList'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/item.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/item.Response'
+      security:
+      - token: []
+      summary: get item list
+      tags:
+      - Item
+  /v1/login:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: user login
+      parameters:
+      - description: user object
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/user.ReqOfLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/user.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/user.Response'
+      security:
+      - token: []
+      summary: user login
+      tags:
+      - User
+swagger: "2.0"

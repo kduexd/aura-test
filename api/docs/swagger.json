@@ -1,0 +1,180 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/v1/item": {
+            "get": {
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "description": "get item list",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Item"
+                ],
+                "summary": "get item list",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "username",
+                        "name": "username",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "type of item",
+                        "name": "item",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/item.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "item": {
+                                            "$ref": "#/definitions/ads.ResOfList"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/item.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/item.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/login": {
+            "post": {
+                "security": [
+                    {
+                        "token": []
+                    }
+                ],
+                "description": "user login",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "user login",
+                "parameters": [
+                    {
+                        "description": "user object",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.ReqOfLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/user.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/user.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ads.ResOfList": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "item_name": {
+                    "type": "string"
+                },
+                "itemid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "item.Response": {
+            "type": "object",
+            "properties": {
+                "item": {},
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "user.ReqOfLogin": {
+            "type": "object",
+            "required": [
+                "Password",
+                "UserName"
+            ],
+            "properties": {
+                "Password": {
+                    "type": "string",
+                    "example": "12345"
+                },
+                "UserName": {
+                    "type": "string",
+                    "example": "test"
+                }
+            }
+        },
+        "user.Response": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
