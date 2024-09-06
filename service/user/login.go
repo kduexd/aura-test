@@ -25,7 +25,7 @@ type (
 	}
 
 	ReqOfLogin struct {
-		UserName string `json:"UserName" binding:"required" example:"test"`
+		Username string `json:"Username" binding:"required" example:"test"`
 		Password string `json:"Password" binding:"required" example:"12345"`
 	}
 
@@ -63,7 +63,7 @@ func (t *taskOfLogin) exec(ctx context.Context) error {
 }
 
 func (t *taskOfLogin) validate(ctx context.Context) error {
-	userInfo, err := user.GetUserInfo(ctx, t.req.UserName)
+	userInfo, err := user.GetUserInfo(ctx, t.req.Username)
 	if err != nil {
 		return errors.New("get user info failed")
 	}
@@ -91,7 +91,7 @@ func (t *taskOfLogin) setData(ctx context.Context) error {
 		return errors.New("json encode failed")
 	}
 
-	apiToken := "user._." + t.storage.User.UUID + "._." + t.req.UserName + token
+	apiToken := "user._." + t.storage.User.UUID + "._." + t.req.Username + token
 
 	client.Set(ctx, apiToken, string(userToJson), config.ConForge().GetDuration(env.TokenExpireTime)*time.Second)
 

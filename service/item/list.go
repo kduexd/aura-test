@@ -15,8 +15,8 @@ type (
 	}
 
 	ReqOfList struct {
-		Username string `json:"username" binding:"required" example:"test"`
-		ItemType string `json:"item" binding:"required" example:"tools"`
+		Username string `form:"username" binding:"required" example:"test"`
+		ItemType string `form:"item" binding:"required" example:"tools"`
 	}
 
 	ResOfList struct {

@@ -31,7 +31,7 @@ type Response struct {
 // @Router /v1/login [post]
 func Login(c *gin.Context) {
 	req := new(biz.ReqOfLogin)
-	if err := c.Bind(req); err != nil {
+	if err := c.BindJSON(req); err != nil {
 		log.Error(err)
 		c.JSON(http.StatusOK, Response{
 			Status:      "failed",
