@@ -164,14 +164,14 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "Password",
-                "UserName"
+                "Username"
             ],
             "properties": {
                 "Password": {
                     "type": "string",
                     "example": "12345"
                 },
-                "UserName": {
+                "Username": {
                     "type": "string",
                     "example": "test"
                 }

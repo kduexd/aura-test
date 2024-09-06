@@ -19,12 +19,12 @@ definitions:
       Password:
         example: "12345"
         type: string
-      UserName:
+      Username:
         example: test
         type: string
     required:
     - Password
-    - UserName
+    - Username
     type: object
   user.Response:
     properties:
